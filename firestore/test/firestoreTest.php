@@ -703,7 +703,7 @@ class firestoreTest extends TestCase
         }
     }
 
-    private static function runFirestoreSnippet($snippetName, array $args = null)
+    protected static function runFirestoreSnippet($snippetName, array $args = null)
     {
         if ($args === null) {
             $args = [
