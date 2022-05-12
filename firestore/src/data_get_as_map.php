@@ -36,19 +36,14 @@ function data_get_as_map(string $projectId): void
     $db = new FirestoreClient([
         'projectId' => $projectId,
     ]);
-    # [START fs_get_document]
-    # [START firestore_data_get_as_map]
-    $docRef = $db->collection('samples/php/cities')->document('SF');
+    $docRef = $db->collection('google-cloud-php_issues_5164')->document('SomeDoc');
     $snapshot = $docRef->snapshot();
-
     if ($snapshot->exists()) {
         printf('Document data:' . PHP_EOL);
         print_r($snapshot->data());
     } else {
         printf('Document %s does not exist!' . PHP_EOL, $snapshot->id());
     }
-    # [END firestore_data_get_as_map]
-    # [END fs_get_document]
 }
 
 // The following 2 lines are only needed to run the samples
