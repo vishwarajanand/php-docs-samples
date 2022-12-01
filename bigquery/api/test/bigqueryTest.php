@@ -84,6 +84,24 @@ class FunctionsTest extends TestCase
         $this->verifyTable($destinationTable, 'Brent Shaffer', 3);
     }
 
+    public function testSnapshotTable()
+    {
+        $sourceTableId = $this->createTempTable();
+        $destinationTableId = sprintf('test_snapshot_table_%s', time());
+
+        // run the import
+        $output = $this->runFunctionSnippet('snapshot_table', [
+            self::$datasetId,
+            $sourceTableId,
+            $destinationTableId,
+        ]);
+
+        $destinationTable = self::$dataset->table($destinationTableId);
+        $this->assertStringContainsString('Snapshot created successfully', $output);
+        $this->assertStringContainsString('snapshotDefinition', $output);
+        $this->verifyTable($destinationTable, 'Brent Shaffer', 3);
+    }
+
     public function testCreateAndDeleteDataset()
     {
         $tempDatasetId = sprintf('test_dataset_%s', time());
